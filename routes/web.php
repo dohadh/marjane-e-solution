@@ -44,47 +44,39 @@ use App\Models\Achat;
 
 // Route pour rediriger vers la page de connexion dès l'accès à la racine
 Route::get('/', function () {
-    return Auth::check() ? redirect()->route('dashboard') : view('auth.login');
+    return Auth::check() ? redirect()->route('dashboard') : redirect()->route('login');
 });
 
-// Routes pour la connexion et l'inscription
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store']);
 
-
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/clients/dashboard', [ClientDashboardController::class, 'index'])->name('clients.dashboard');
-});
 
 // Routes d'auth client (guest)
-Route::middleware('guest:client')->prefix('client')->name('clients.')->group(function () {
-    Route::get('/login', [ClientAuthenticatedSessionController::class, 'create'])->name('clients.login');
-    Route::post('/login', [ClientAuthenticatedSessionController::class, 'store']);
-    Route::get('/register', [ClientRegisteredUserController::class, 'create'])->name('clients.register');
-    Route::post('/register', [ClientRegisteredUserController::class, 'store']);
+Route::middleware('guest:client')
+    ->prefix('clients')
+    ->name('clients.')
+    ->group(function () {
+        Route::get('/login', [ClientAuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('/login', [ClientAuthenticatedSessionController::class, 'store'])->name('login');
+        Route::get('/register', [ClientRegisteredUserController::class, 'create'])->name('register');
+        Route::post('/register', [ClientRegisteredUserController::class, 'store'])->name('register');
 });
-
+    
+    
 // Routes protégées pour les clients (authentifiés)
-Route::middleware('auth:client')->prefix('client')->group(function () {
-    Route::get('dashboard', [ClientController::class, 'dashboard'])->name('clients.dashboard');
-    Route::get('/profile/edit', [ClientController::class, 'editProfile'])->name('clients.profile.edit');
+Route::middleware('isClient')->prefix('clients')->name('clients.')->group(function () {
+    Route::get('dashboard', [ClientController::class, 'dashboard'])->name('dashboard');
+    Route::post('/logout', [ClientAuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::get('/profile/edit', [ClientController::class, 'editProfile'])->name('profile.edit');
     Route::get('/achats/create', [AchatController::class, 'create'])
          ->name('achats.create');
     Route::post('/achats', [AchatController::class, 'store'])
          ->name('achats.store');
     Route::get('achats/create/{produit_id}', [AchatController::class, 'create'])->name('achats.create');
     
-
 });
 
-// Déconnexion client (auth)
-Route::middleware('auth:client')->prefix('client')->name('clients.')->group(function () {
-    Route::post('/logout', [ClientAuthenticatedSessionController::class, 'destroy'])->name('logout');
-});
+
+
 
 
 

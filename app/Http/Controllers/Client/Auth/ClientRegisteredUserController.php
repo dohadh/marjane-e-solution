@@ -13,7 +13,7 @@ class ClientRegisteredUserController extends Controller
     // Affiche le formulaire d'inscription client
     public function create()
     {
-        return view('client.auth.register');
+        return view('clients.auth.client-register');
     }
 
     // Traite l'inscription client
@@ -26,12 +26,12 @@ class ClientRegisteredUserController extends Controller
         ]);
 
         $client = Client::create([
-            'name' => $request->name,
+            'nom' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::guard('clientsc')->login($client);
+       Auth::guard('client')->login($client);
 
         return redirect(route('clients.dashboard'));
     }

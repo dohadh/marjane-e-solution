@@ -43,6 +43,6 @@ class Client extends Authenticatable
 
     public function achats()
     {
-        return $this->hasMany(Achat::class); // Utilisez le vrai nom de votre modèle
+        return $this->hasMany(Achat::class);
     }
 }

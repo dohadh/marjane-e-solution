@@ -11,7 +11,7 @@ class ClientAuthenticatedSessionController extends Controller
     // Affiche le formulaire de connexion client
     public function create()
     {
-        return view('client.auth.login');
+        return view('clients.auth.client-login');
     }
 
     // Traite la tentative de connexion client
@@ -22,7 +22,7 @@ class ClientAuthenticatedSessionController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('clients')->attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::guard('client')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('clients.dashboard'));
@@ -36,7 +36,7 @@ class ClientAuthenticatedSessionController extends Controller
     // Déconnecte le client
     public function destroy(Request $request)
     {
-        Auth::guard('clients')->logout();
+        Auth::guard('client')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

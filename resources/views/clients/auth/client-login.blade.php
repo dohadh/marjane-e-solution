@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Connexion Client</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> {{-- si tu utilises Tailwind ou autre --}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> 
 </head>
 <body>
     <div class="container mx-auto max-w-md mt-10 p-6 border rounded shadow">
