@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Produit;
 
+
 class ClientController extends Controller
 {
     public function index(Request $request)
@@ -41,7 +42,7 @@ class ClientController extends Controller
         public function __construct()
     {
         $this->middleware('isAdmin')->only(['create', 'store', 'edit', 'update', 'destroy']);
-        $this->middleware('auth:client')->only('dashboard'); // Changez 'auth' en 'auth:client'
+        $this->middleware('auth:client')->only('dashboard'); 
          app()->setLocale('fr');
     }
 

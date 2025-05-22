@@ -30,11 +30,19 @@
 
         <ul class="nav flex-column">
             {{-- Ces liens sont visibles par tous --}}
-            <li class="nav-item mb-2 {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                <a class="nav-link rounded" href="{{ route('dashboard') }}">
-                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                </a>
-            </li>
+            @if(isAdmin() || isUser())
+                <li class="nav-item mb-2 {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <a class="nav-link rounded" href="{{ route('dashboard') }}">
+                        <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                    </a>
+                </li>
+            @elseif (isClient())
+                <li class="nav-item mb-2 {{ request()->routeIs('clients.dashboard') ? 'active' : '' }}">
+                    <a class="nav-link rounded" href="{{ route('clients.dashboard') }}">
+                        <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                    </a>
+                </li>
+            @endif
 
                 @if(isAdmin() || isUser())
                     <li class="nav-item mb-2 {{ request()->routeIs('clients.*') ? 'active' : '' }}">
@@ -44,27 +52,37 @@
                     </li>
                 @endif
 
-                <li class="nav-item mb-2 {{ request()->routeIs('factures.*') ? 'active' : '' }}">
-                    <a class="nav-link rounded" href="{{ route('factures.index') }}">
-                        <i class="fas fa-file-invoice me-2"></i> Factures
-                    </a>
-                </li>
-                <li class="nav-item mb-2 {{ request()->routeIs('produits.*') ? 'active' : '' }}">
-                    <a class="nav-link rounded" href="{{ route('produits.index') }}">
-                        <i class="fas fa-box-open me-2"></i> Produits
-                        <span class="badge bg-danger float-end">2</span>
-                    </a>
-                </li>
+                @if(isAdmin() || isUser())
+                    <li class="nav-item mb-2 {{ request()->routeIs('factures.*') ? 'active' : '' }}">
+                        <a class="nav-link rounded" href="{{ route('factures.index') }}">
+                            <i class="fas fa-file-invoice me-2"></i> Factures
+                        </a>
+                    </li>
+                @endif
+                 @if(isAdmin() || isUser() || isClient())
+                    <li class="nav-item mb-2 {{ request()->routeIs('produits.*') ? 'active' : '' }}">
+                        <a class="nav-link rounded" href="{{ route('produits.index') }}">
+                            <i class="fas fa-box-open me-2"></i> Produits
+                            <span class="badge bg-danger float-end">2</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if(isAdmin() || isUser())
                 <li class="nav-item mb-2 {{ request()->routeIs('fournisseurs.*') ? 'active' : '' }}">
                     <a class="nav-link rounded" href="{{ route('fournisseurs.index') }}">
                         <i class="fas fa-truck me-2"></i> Fournisseurs
                     </a>
                 </li>
-                <li class="nav-item mb-2 {{ request()->routeIs('achats.*') ? 'active' : '' }}">
-                    <a class="nav-link rounded" href="{{ route('achats.index') }}">
-                        <i class="fas fa-shopping-cart me-2"></i> Achats
-                    </a>
-                </li>
+                @endif
+
+               
+                    <li class="nav-item mb-2 {{ request()->routeIs('achats.*') ? 'active' : '' }}">
+                        <a class="nav-link rounded" href="{{ route('achats.index') }}">
+                            <i class="fas fa-shopping-cart me-2"></i> Achats
+                        </a>
+                    </li>
+               
             
 
             <hr class="my-3">
@@ -72,30 +90,34 @@
                 <span>Accès Rapides</span>
             </h6>
 
-            
+             @if(isAdmin() || isUser())
             <li class="nav-item mb-2 {{ request()->routeIs('ventes.*') ? 'active' : '' }}">
                 <a class="nav-link rounded text-primary" href="{{ route('ventes.index') }}">
                     <i class="fas fa-shopping-cart me-2"></i> Ventes
                 </a>
             </li>
+            @endif
 
-            <li class="nav-item mb-2 {{ request()->routeIs('stock.index') ? 'active' : '' }}">
-                <a class="nav-link rounded text-secondary" href="{{ route('stock.index') }}">
-                    <i class="fas fa-boxes me-2"></i> Stock
-                </a>
-            </li>
+             @if(isAdmin() || isUser())
+                <li class="nav-item mb-2 {{ request()->routeIs('stock.index') ? 'active' : '' }}">
+                    <a class="nav-link rounded text-secondary" href="{{ route('stock.index') }}">
+                        <i class="fas fa-boxes me-2"></i> Stock
+                    </a>
+                </li>
+            @endif
 
             <li class="nav-item mb-2 {{ request()->routeIs('stock.rupture') ? 'active' : '' }}">
                 <a class="nav-link rounded text-danger" href="{{ route('stock.rupture') }}">
                     <i class="fas fa-exclamation-triangle me-2"></i> Rupture de Stock
                 </a>
             </li>
-
+             @if(isAdmin() || isUser())
             <li class="nav-item mb-2 {{ request()->routeIs('rapports.index') ? 'active' : '' }}">
                 <a class="nav-link rounded text-info" href="{{ route('rapports.index') }}">
                     <i class="fas fa-chart-bar me-2"></i> Rapports
                 </a>
             </li>
+            @endif
 
             <form method="GET" action="{{ route('search') }}" class="d-flex mt-3">
                 <input type="text" name="search" class="form-control form-control-sm" placeholder="Rechercher..." value="{{ request('search') }}">

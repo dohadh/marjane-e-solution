@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\Client\ClientDashboardController;
 use App\Http\Controllers\Client\Auth\ClientAuthenticatedSessionController;
 use App\Http\Controllers\Client\Auth\ClientRegisteredUserController;
 
@@ -64,17 +63,13 @@ Route::middleware('guest:client')
     
     
 // Routes protégées pour les clients (authentifiés)
-Route::middleware('isClient')->prefix('clients')->name('clients.')->group(function () {
+Route::middleware('auth:client')->prefix('clients')->name('clients.')->group(function () {
     Route::get('dashboard', [ClientController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [ClientAuthenticatedSessionController::class, 'destroy'])->name('logout');
-
     Route::get('/profile/edit', [ClientController::class, 'editProfile'])->name('profile.edit');
-     Route::get('/profile', [ClientProfileController::class, 'show'])->name('profile');
+    Route::get('/profile', [ClientProfileController::class, 'show'])->name('profile');
     Route::get('/client/achats/index', [ClientAchatController::class, 'index'])->name('achats.index');
     Route::post('/client/achats', [ClientAchatController::class, 'store'])->name('achats.store');
-    Route::get('/produits', [ProduitController::class, 'indexForClient'])->name('clients.produits');
-    
-    
 });
 
 
@@ -103,7 +98,6 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth.user.or.client'])->group(function () {
     Route::resource('produits', ProduitController::class);
-    // 
 });
 
 // Routes protégées par auth

@@ -33,12 +33,15 @@
                 <button class="btn btn-link dropdown-toggle d-flex align-items-center" type="button" 
                         id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="me-2 d-none d-lg-block text-end">
-                        @if(Auth::check())
+                        @if(isAdmin())
                             <div class="fw-bold">{{ Auth::user()->name }}</div>
                             <small class="text-muted">Administrateur</small>
-                        @else
-                            <div class="fw-bold">Invité</div>
-                            <small class="text-muted">Non connecté</small>
+                        @elseif (isUser())
+                            <div class="fw-bold">{{ Auth::user()->name }}</div>
+                            <small class="text-muted">Non Admin</small>
+                        @elseif (isClient())
+                            <div class="fw-bold">{{ Auth::guard('client')->user()->nom }}</div>
+                            <small class="text-muted">Client</small>
                         @endif
                     </div>
                     @if(Auth::check())
@@ -51,7 +54,7 @@
                 </button>
 
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser">
-                    @if(Auth::check())
+                   @if(Auth::check())
                         <li><a class="dropdown-item" href="{{ route('profile.index') }}">
                             <i class="fas fa-user-circle me-2"></i> Profil</a>
                         </li>
@@ -59,14 +62,25 @@
                             <i class="fas fa-cog me-2"></i> Paramètres</a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="dropdown-item">
-                                    <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
-                                </button>
-                            </form>
-                        </li>
+                        @if(isAdmin() || isUser())
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+                                    </button>
+                                </form>
+                            </li>
+                        @elseif(isClient())
+                            <li>
+                                <form method="POST" action="{{ route('clients.logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Client Déconnexion
+                                    </button>
+                                </form>
+                            </li>
+                        @endif
                     @else
                         <li class="px-3 py-2 text-muted">Veuillez vous connecter</li>
                     @endif
