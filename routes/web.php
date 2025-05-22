@@ -16,6 +16,8 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RapportController;
+use App\Http\Controllers\ClientAchatController;
+use App\Http\Controllers\ClientProfileController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -67,11 +69,11 @@ Route::middleware('isClient')->prefix('clients')->name('clients.')->group(functi
     Route::post('/logout', [ClientAuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::get('/profile/edit', [ClientController::class, 'editProfile'])->name('profile.edit');
-    Route::get('/achats/create', [AchatController::class, 'create'])
-         ->name('achats.create');
-    Route::post('/achats', [AchatController::class, 'store'])
-         ->name('achats.store');
-    Route::get('achats/create/{produit_id}', [AchatController::class, 'create'])->name('achats.create');
+     Route::get('/profile', [ClientProfileController::class, 'show'])->name('profile');
+    Route::get('/client/achats/index', [ClientAchatController::class, 'index'])->name('achats.index');
+    Route::post('/client/achats', [ClientAchatController::class, 'store'])->name('achats.store');
+    Route::get('/produits', [ProduitController::class, 'indexForClient'])->name('clients.produits');
+    
     
 });
 
@@ -97,6 +99,11 @@ Route::middleware('guest')->group(function () {
                 ->name('password.update');
 
 
+});
+
+Route::middleware(['auth.user.or.client'])->group(function () {
+    Route::resource('produits', ProduitController::class);
+    // 
 });
 
 // Routes protégées par auth
@@ -133,7 +140,7 @@ Route::middleware(['auth'])->group(function () {
             //     ->sum('quantite_totale'),
         ]);
     })->name('dashboard');
-
+    
     // Profil utilisateur
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -145,7 +152,7 @@ Route::middleware(['auth'])->group(function () {
     // Gestion des entités principales
     Route::resource('clients', ClientController::class);
     Route::resource('fournisseurs', FournisseurController::class);
-    Route::resource('produits', ProduitController::class);
+    // Route::resource('produits', ProduitController::class);
     Route::resource('factures', FactureController::class);
     Route::get('/factures/export/pdf', [FactureController::class, 'exportPDF'])->name('factures.export.pdf');
     Route::resource('achats', AchatController::class);

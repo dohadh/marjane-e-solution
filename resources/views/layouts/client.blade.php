@@ -10,14 +10,13 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
-    <!-- Bootstrap 5.3.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
     <!-- Google Fonts - Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
         :root {
@@ -26,7 +25,7 @@
             --light: #f8f9fa;
             --dark: #212529;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #E0F7FF 0%, var(--primary) 100%);
@@ -35,7 +34,7 @@
         }
 
         .main-content {
-            margin-left: 220px;
+            margin-left: 250px; /* Fix pour correspondre à la largeur du sidebar */
             padding: 20px;
         }
 
@@ -51,27 +50,27 @@
 
 <body class="d-flex flex-column">
 
-    <div class="d-flex">
-        {{-- Sidebar --}}
-        @include('clients.layouts.sidebar')
+<div class="d-flex">
+    {{-- Sidebar --}}
+    @include('clients.layouts.sidebar')
 
-        <div class="flex-grow-1 d-flex flex-column">
-            {{-- Header --}}
-            @include('clients.layouts.header')
+    <div class="flex-grow-1 d-flex flex-column">
+        {{-- Header --}}
+        @include('clients.layouts.header')
 
-            {{-- Contenu principal --}}
-            <main class="main-content">
-                @yield('content')
-            </main>
+        {{-- Contenu principal --}}
+        <main class="main-content">
+            @yield('content')
+        </main>
 
-            {{-- Footer --}}
-            @include('clients.layouts.footer')
-        </div>
+        {{-- Footer --}}
+        @include('clients.layouts.footer')
     </div>
+</div>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    @stack('scripts')
+@stack('scripts')
 </body>
 </html>

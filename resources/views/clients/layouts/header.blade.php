@@ -29,7 +29,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUserClient">
                     <li>
-                        {{--<a class="dropdown-item" href="{{ route('clients.profil') }}">--}}
+                        <a class="dropdown-item" href="{{ route('clients.profile') }}">
                             <i class="fas fa-user-circle me-2"></i> Mon profil
                         </a>
                     </li>

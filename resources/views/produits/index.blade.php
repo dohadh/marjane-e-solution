@@ -31,7 +31,8 @@
         </div>
 
         <!-- Bouton Ajouter -->
-         @if(auth()->user()->hasRole('admin'))
+         {{-- @if(auth()->user()->hasRole('admin')) --}}
+         @if(isAdmin())
         <a href="{{ route('produits.create') }}" class="btn btn-primary">
             <i class="bi bi-plus-circle me-1"></i> Ajouter
         </a>
@@ -102,7 +103,7 @@
                         <a href="{{ route('produits.show', $produit) }}" class="btn btn-sm btn-info" title="Voir détails">
                             <i class="bi bi-eye-fill"></i>
                         </a>
-                        @if(auth()->user()->hasRole('admin'))
+                        @if(isAdmin())
                         <a href="{{ route('produits.edit', $produit) }}" class="btn btn-sm btn-warning" title="Modifier">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
@@ -203,7 +204,7 @@
         font-weight: 500;
         padding: 0.35em 0.65em;
     }
-    .btn-group .btn {
+-    .btn-group .btn {
         padding: 0.375rem 0.75rem;
         font-size: 0.875rem;
     }

@@ -11,7 +11,7 @@
     <div class="row g-4">
         {{-- Card Profil --}}
         <div class="col-md-6">
-           {{-- <a href="{{ route('client.profil') }}" class="text-decoration-none">--}} 
+           <a href="{{ route('clients.profile') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm h-100 hover-shadow rounded cursor-pointer">
                     <div class="card-body bg-light rounded d-flex flex-column justify-content-between">
                         <div>
@@ -26,6 +26,8 @@
                 </div>
             </a>
         </div>
+
+        
 
         {{-- Card Commandes --}}
         <div class="col-md-6">

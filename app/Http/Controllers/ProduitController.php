@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produit;
+use App\Models\User;
+use App\Notifications\ProduitRuptureDeStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 
 class ProduitController extends Controller
 {
@@ -26,6 +29,12 @@ class ProduitController extends Controller
     
         return view('produits.index', compact('produits', 'search', 'type'));
     }
+
+            public function indexForClient()
+        {
+            $produits = Produit::all();
+            return view('clients.produits.index', compact('produits'));
+        }
 
 
     //filtrer par type

@@ -76,9 +76,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function hasRole(string $role): bool
     {
-        if (!array_key_exists($role, self::ROLES)) {
-            throw new \InvalidArgumentException("Rôle invalide : $role");
-        }
+        // if (!array_key_exists($role, self::ROLES)) {
+        //     throw new \InvalidArgumentException("Rôle invalide : $role");
+        // }
         return $this->role === $role;
     }
 

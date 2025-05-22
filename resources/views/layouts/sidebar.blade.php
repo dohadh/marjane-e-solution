@@ -36,12 +36,14 @@
                 </a>
             </li>
 
-           
-                <li class="nav-item mb-2 {{ request()->routeIs('clients.*') ? 'active' : '' }}">
-                    <a class="nav-link rounded" href="{{ route('clients.index') }}">
-                        <i class="fas fa-users me-2"></i> Clients
-                    </a>
-                </li>
+                @if(isAdmin() || isUser())
+                    <li class="nav-item mb-2 {{ request()->routeIs('clients.*') ? 'active' : '' }}">
+                        <a class="nav-link rounded" href="{{ route('clients.index') }}">
+                            <i class="fas fa-users me-2"></i> Clients
+                        </a>
+                    </li>
+                @endif
+
                 <li class="nav-item mb-2 {{ request()->routeIs('factures.*') ? 'active' : '' }}">
                     <a class="nav-link rounded" href="{{ route('factures.index') }}">
                         <i class="fas fa-file-invoice me-2"></i> Factures
@@ -70,7 +72,7 @@
                 <span>Accès Rapides</span>
             </h6>
 
-            {{-- Ces liens peuvent être visibles par tout le monde ou juste client/admin selon la logique --}}
+            
             <li class="nav-item mb-2 {{ request()->routeIs('ventes.*') ? 'active' : '' }}">
                 <a class="nav-link rounded text-primary" href="{{ route('ventes.index') }}">
                     <i class="fas fa-shopping-cart me-2"></i> Ventes
@@ -104,7 +106,8 @@
         </ul>
 
         {{-- Administration visible uniquement pour l'admin --}}
-        @if(Auth::guard('web')->check() && Auth::guard('web')->user()->role === 'admin')
+        {{-- @if(Auth::guard('web')->check() && Auth::guard('web')->user()->role === 'admin') --}}
+        @if(isAdmin())
             <hr class="my-3">
             <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
                 <span>Administration</span>
