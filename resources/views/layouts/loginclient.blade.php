@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Marjan Holding') }} - @yield('title', 'Client Marjan Holding')</title>
+    <title>{{ config('app.name', 'Marjan Holding') }} - @yield('title', 'Client Auth')</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -26,47 +26,33 @@
             --light: #f8f9fa;
             --dark: #212529;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #E0F7FF 0%, var(--primary) 100%);
             min-height: 100vh;
             margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .main-content {
-            margin-left: 220px;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-            }
+        .auth-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
         }
     </style>
 
     @stack('styles')
 </head>
 
-<body class="d-flex flex-column">
-
-    <div class="d-flex">
-        {{-- Sidebar --}}
-        @include('clients.layouts.sidebar')
-
-        <div class="flex-grow-1 d-flex flex-column">
-            {{-- Header --}}
-            @include('clients.layouts.header')
-
-            {{-- Contenu principal --}}
-            <main class="main-content">
-                @yield('content')
-            </main>
-
-            {{-- Footer --}}
-            @include('clients.layouts.footer')
-        </div>
+<body>
+    <div class="auth-container">
+        @yield('content')
     </div>
 
     <!-- Bootstrap Bundle with Popper -->

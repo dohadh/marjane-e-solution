@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 // Redirection spécifique selon le guard connecté
                 if ($guard === 'client') {
-                    return redirect('/client/dashboard');
+                    return redirect('/clients/dashboard');
                 }
                 // Par défaut pour le guard 'web' ou autre
                 return redirect(RouteServiceProvider::HOME);

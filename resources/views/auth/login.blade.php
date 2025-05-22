@@ -11,7 +11,7 @@
         </div>
 
         <h1 class="royal-blue-title">Marjan Holding</h1>
-        <h2 class="royal-blue-subtitle">Login</h2>
+        <h2 class="royal-blue-subtitle">Login Admin</h2>
 
         <form method="POST" action="{{ route('login') }}">
             @csrf

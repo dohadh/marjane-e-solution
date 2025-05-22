@@ -1,79 +1,129 @@
+@extends('layouts.loginclient')
 
+@section('title', 'Client Login')
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Connexion Client</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> 
-</head>
-<body>
-    <div class="container mx-auto max-w-md mt-10 p-6 border rounded shadow">
+@push('styles')
+<style>
+    /* Styles spécifiques au formulaire */
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-        <h1 class="text-2xl font-bold mb-6 text-center">Connexion Client</h1>
+    .login-icon {
+        font-size: 3rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
 
-        @if ($errors->any())
-            <div class="bg-red-100 text-red-700 p-3 mb-4 rounded">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>- {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    .login-title {
+        color: var(--primary);
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
 
-        <form method="POST" action="{{ route('clients.login') }}">
-            @csrf
+    .login-subtitle {
+        color: var(--secondary);
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
 
-            <div class="mb-4">
-                <label for="email" class="block mb-1 font-semibold">Adresse e-mail</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value="{{ old('email') }}"
-                    required
-                    autofocus
-                    class="w-full border px-3 py-2 rounded"
-                />
-            </div>
+    .form-input-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
 
-            <div class="mb-4">
-                <label for="password" class="block mb-1 font-semibold">Mot de passe</label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    required
-                    autocomplete="current-password"
-                    class="w-full border px-3 py-2 rounded"
-                />
-            </div>
+    .form-input-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary);
+    }
 
-            <div class="mb-4">
-                <label class="inline-flex items-center">
-                    <input
-                        type="checkbox"
-                        name="remember"
-                        class="mr-2"
-                        {{ old('remember') ? 'checked' : '' }}
-                    />
-                    Se souvenir de moi
-                </label>
-            </div>
+    .form-control {
+        padding-left: 40px;
+        border: 2px solid var(--primary);
+        border-radius: 6px;
+        height: 45px;
+    }
 
-            <div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                    Se connecter
-                </button>
-            </div>
-        </form>
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.2);
+    }
 
-        <p class="mt-6 text-center text-sm">
-            Pas encore inscrit ? 
-            <a href="{{ route('clients.register') }}" class="text-blue-600 hover:underline">Créer un compte client</a>
-        </p>
+    .login-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-weight: 600;
+        width: 100%;
+        transition: all 0.3s;
+    }
+
+    .login-btn:hover {
+        background-color: #0f2c60;
+        transform: translateY(-2px);
+    }
+
+    .login-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    .login-link {
+        color: var(--primary);
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .login-link:hover {
+        text-decoration: underline;
+    }
+</style>
+@endpush
+
+@section('content')
+<div>
+    <div class="login-header">
+        <i class="bi bi-person-circle login-icon"></i>
+        <h1 class="login-title">Marjan Holding</h1>
+        <h3 class="login-subtitle">Login Client</h3>
     </div>
-</body>
-</html>
+
+    <form method="POST" action="{{ route('clients.login') }}">
+        @csrf
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-envelope-fill form-input-icon"></i>
+                <input type="email" class="form-control" id="email" name="email" required autofocus placeholder="Email">
+            </div>
+        </div>
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-lock-fill form-input-icon"></i>
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ route('password.request') }}" class="login-link">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login-btn mb-3">
+            <i class="bi bi-box-arrow-in-right me-2"></i> Login
+        </button>
+
+        <div class="login-footer">
+            <span class="text-muted">Don't have an account? </span>
+            <a href="{{ route('clients.register') }}" class="login-link">Register</a>
+        </div>
+    </form>
+</div>
+@endsection

@@ -78,7 +78,7 @@ class ClientController extends Controller
             }
         });
 
-        return redirect()->route('client.dashboard')
+        return redirect()->route('clients.dashboard')
             ->with('success', 'Achat effectué avec succès!');
     }
 

@@ -1,89 +1,148 @@
+@extends('layouts.loginclient')
 
+@push('styles')
+<style>
+    .register-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Inscription Client</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</head>
-<body>
-    <div class="container mx-auto max-w-md mt-10 p-6 border rounded shadow">
+    .register-icon {
+        font-size: 3rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
 
-        <h1 class="text-2xl font-bold mb-6 text-center">Inscription Client</h1>
+    .register-title {
+        color: var(--primary);
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
 
-        @if ($errors->any())
-            <div class="bg-red-100 text-red-700 p-3 mb-4 rounded">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>- {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    .register-subtitle {
+        color: var(--secondary);
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
 
-        <form method="POST" action="{{ route('clients.register') }}">
-            @csrf
+    .form-input-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
 
-            <div class="mb-4">
-                <label for="name" class="block mb-1 font-semibold">Nom complet</label>
-                <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value="{{ old('name') }}"
-                    required
-                    autofocus
-                    class="w-full border px-3 py-2 rounded"
-                />
-            </div>
+    .form-input-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary);
+    }
 
-            <div class="mb-4">
-                <label for="email" class="block mb-1 font-semibold">Adresse e-mail</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value="{{ old('email') }}"
-                    required
-                    class="w-full border px-3 py-2 rounded"
-                />
-            </div>
+    .form-control {
+        padding-left: 40px;
+        border: 2px solid var(--primary);
+        border-radius: 6px;
+        height: 45px;
+    }
 
-            <div class="mb-4">
-                <label for="password" class="block mb-1 font-semibold">Mot de passe</label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    required
-                    class="w-full border px-3 py-2 rounded"
-                />
-            </div>
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.2);
+    }
 
-            <div class="mb-6">
-                <label for="password_confirmation" class="block mb-1 font-semibold">Confirmer le mot de passe</label>
-                <input
-                    id="password_confirmation"
-                    name="password_confirmation"
-                    type="password"
-                    required
-                    class="w-full border px-3 py-2 rounded"
-                />
-            </div>
+    .register-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-weight: 600;
+        width: 100%;
+        transition: all 0.3s;
+    }
 
-            <div>
-                <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
-                    S'inscrire
-                </button>
-            </div>
-        </form>
+    .register-btn:hover {
+        background-color: #0f2c60;
+        transform: translateY(-2px);
+    }
 
-        <p class="mt-6 text-center text-sm">
-            Déjà un compte ? 
-            <a href="{{ route('clients.login') }}" class="text-green-600 hover:underline">Se connecter</a>
-        </p>
+    .register-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    .register-link {
+        color: var(--primary);
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .register-link:hover {
+        text-decoration: underline;
+    }
+</style>
+@endpush
+
+@section('content')
+    <div class="register-header">
+        <i class="bi bi-person-plus-fill register-icon"></i>
+        <h1 class="register-title">Marjan Holding</h1>
+        <h3 class="register-subtitle">Register Client</h3>
     </div>
-</body>
-</html>
+
+    <form method="POST" action="{{ route('clients.register') }}">
+        @csrf
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-person-fill form-input-icon"></i>
+                <input type="text" name="name" class="form-control" placeholder="Name" required autofocus>
+            </div>
+        </div>
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-envelope-fill form-input-icon"></i>
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+        </div>
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-geo-alt-fill form-input-icon"></i>
+                <input type="text" name="address" class="form-control" placeholder="Address" required>
+            </div>
+        </div>
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-telephone-fill form-input-icon"></i>
+                <input type="text" name="phone" class="form-control" placeholder="Phone" required>
+            </div>
+        </div>
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-lock-fill form-input-icon"></i>
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+        </div>
+
+        <div class="form-input-group">
+            <div class="position-relative">
+                <i class="bi bi-shield-lock-fill form-input-icon"></i>
+                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+            </div>
+        </div>
+
+        <button type="submit" class="register-btn mb-3">
+            <i class="bi bi-person-check-fill me-2"></i> Register
+        </button>
+
+        <div class="register-footer">
+            <span class="text-muted">Already have an account? </span>
+            <a href="{{ route('clients.login') }}" class="register-link">Login</a>
+        </div>
+    </form>
+@endsection
