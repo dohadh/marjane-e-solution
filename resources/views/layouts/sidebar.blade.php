@@ -76,13 +76,14 @@
                 </li>
                 @endif
 
-               
-                    <li class="nav-item mb-2 {{ request()->routeIs('achats.*') ? 'active' : '' }}">
-                        <a class="nav-link rounded" href="{{ route('achats.index') }}">
-                            <i class="fas fa-shopping-cart me-2"></i> Achats
-                        </a>
-                    </li>
-               
+                    @if(isAdmin() || isUser())
+                        <li class="nav-item mb-2 {{ request()->routeIs('achats.*') ? 'active' : '' }}">
+                            <a class="nav-link rounded" href="{{ route('achats.index') }}">
+                                <i class="fas fa-shopping-cart me-2"></i> Achats
+                            </a>
+                        </li>
+                    @endif
+                
             
 
             <hr class="my-3">
@@ -105,12 +106,13 @@
                     </a>
                 </li>
             @endif
-
+             @if(isAdmin() || isUser() || isClient())
             <li class="nav-item mb-2 {{ request()->routeIs('stock.rupture') ? 'active' : '' }}">
                 <a class="nav-link rounded text-danger" href="{{ route('stock.rupture') }}">
                     <i class="fas fa-exclamation-triangle me-2"></i> Rupture de Stock
                 </a>
             </li>
+            @endif
              @if(isAdmin() || isUser())
             <li class="nav-item mb-2 {{ request()->routeIs('rapports.index') ? 'active' : '' }}">
                 <a class="nav-link rounded text-info" href="{{ route('rapports.index') }}">
@@ -141,9 +143,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link rounded" href="{{ route('parametres') }}">
-                        <i class="fas fa-cog me-2"></i> Paramètres
-                    </a>
+               
                 </li>
             </ul>
         @endif

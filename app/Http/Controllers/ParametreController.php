@@ -10,6 +10,5 @@ class ParametreController extends Controller
     {
         return view('parametres');
     }
-
     
 }

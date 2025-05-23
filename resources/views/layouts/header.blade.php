@@ -54,14 +54,23 @@
                 </button>
 
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser">
-                   @if(Auth::check())
+                   @if(isAdmin() || isUser() )
                         <li><a class="dropdown-item" href="{{ route('profile.index') }}">
                             <i class="fas fa-user-circle me-2"></i> Profil</a>
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('parametres') }}">
-                            <i class="fas fa-cog me-2"></i> Paramètres</a>
+                        
+                        <li><hr class="dropdown-divider"></li>
+
+                     @elseif (isClient())   
+                        <li><a class="dropdown-item" href="{{ route('clients.profile.show') }}">
+                            <i class="fas fa-user-circle me-2"></i> Profil</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('clients.parametres') }}">
+                            <i class="fas fa-history me-2"></i> Historique</a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
+                     @endif
+
                         @if(isAdmin() || isUser())
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
@@ -80,7 +89,7 @@
                                     </button>
                                 </form>
                             </li>
-                        @endif
+                        
                     @else
                         <li class="px-3 py-2 text-muted">Veuillez vous connecter</li>
                     @endif

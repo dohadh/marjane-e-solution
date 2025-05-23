@@ -58,6 +58,8 @@ class ProfileController extends Controller
 
     public function showSettings()
     {
+        /* 
+
         // Récupérer les informations sur les achats
         $totalAchats = Achat::count(); // Nombre total d'achats
         $totalAchatsToday = Achat::whereDate('created_at', today())->count(); // Achats effectués aujourd'hui
@@ -65,6 +67,14 @@ class ProfileController extends Controller
 
         // Retourner la vue avec les informations des achats
         return view('parametres', compact('totalAchats', 'totalAchatsToday', 'totalQuantiteAchatsToday'));
+
+        */
+
+         
+      $clientId = Auth::id(); // ou Auth::user()->id
+        $achats = Achat::with('produit')->where('client_id', $clientId)->get();
+
+        return view('parametres', compact('achats'));
     }
 
     /**

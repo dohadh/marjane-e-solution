@@ -16,6 +16,7 @@
             <!-- Informations utilisateur -->
             <div class="row mb-3">
                 <div class="col-md-3 fw-semibold text-dark-emphasis">Nom :</div>
+                {{-- {{dd(Auth::user())}} --}}
                 <div class="col-md-9 text-dark">{{ Auth::user()->name }}</div>
             </div>
 

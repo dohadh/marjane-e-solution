@@ -38,7 +38,13 @@ class ClientController extends Controller
         return view('clients.dashboard', compact('client', 'produits'));
     }
 
-    
+        public function showProfile()
+        {
+            $client = auth()->user(); // ou auth('client')->user() si tu utilises un guard spécifique
+
+            return view('clients.profile.show', compact('client'));
+        }
+            
         public function __construct()
     {
         $this->middleware('isAdmin')->only(['create', 'store', 'edit', 'update', 'destroy']);

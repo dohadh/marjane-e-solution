@@ -66,21 +66,20 @@ Route::middleware('guest:client')
 Route::middleware('auth:client')->prefix('clients')->name('clients.')->group(function () {
     Route::get('dashboard', [ClientController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [ClientAuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::get('/profile/edit', [ClientController::class, 'editProfile'])->name('profile.edit');
+
+    Route::get('/profile/show', [ClientController::class, 'showProfile'])->name('profile.show');
     Route::get('/profile', [ClientProfileController::class, 'show'])->name('profile');
-    Route::get('/client/achats/index', [ClientAchatController::class, 'index'])->name('achats.index');
-    Route::post('/client/achats', [ClientAchatController::class, 'store'])->name('achats.store');
+    
+    // Route::get('/client/achats/show', [ClientAchatController::class, 'show'])->name('achats.show');
+    Route::post('/achats', [ClientAchatController::class, 'store'])->name('achats.store');
+     Route::get('/achats', [ClientAchatController::class, 'create'])->name('achats.create');
+    Route::get('/parametres', [ProfileController::class, 'showSettings'])->name('parametres');
+
 });
-
-
-
-
 
 
 // Password Reset
 Route::middleware('guest')->group(function () {
-    
-
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
 
@@ -179,7 +178,6 @@ Route::middleware(['auth'])->group(function () {
     ->name('produits.byType');
 
     // Paramètres
-    Route::get('/parametres', [ProfileController::class, 'showSettings'])->name('parametres');
     Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::put('/preferences/update', [UserController::class, 'updatePreferences'])->name('preferences.update');
 

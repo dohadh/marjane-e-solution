@@ -1,4 +1,4 @@
-@extends('layouts.client')
+@extends('layouts.app')
 
 @section('title', 'Mon profil')
 
@@ -8,10 +8,11 @@
 
     <div class="card">
         <div class="card-body">
-            <p><strong>Nom :</strong> {{ $client->name }}</p>
+            <p><strong>Nom :</strong> {{ $client->nom }}</p>
             <p><strong>Email :</strong> {{ $client->email }}</p>
             <!-- Ajoute d'autres infos selon ton modèle Client -->
         </div>
     </div>
+
 </div>
 @endsection

@@ -4,16 +4,17 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">Liste des factures</h2>
-        @if(auth()->user()->role === 'admin')
+        
             <div class="d-flex">
                 <a href="{{ route('factures.export.pdf') }}" class="btn btn-danger me-2">
                     <i class="bi bi-file-earmark-pdf me-1"></i> Exporter en PDF
                 </a>
+        
                 <a href="{{ route('factures.create') }}" class="btn btn-primary">
                     <i class="bi bi-file-earmark-plus me-1"></i> Ajouter une facture
                 </a>
             </div>
-        @endif
+       
     </div>
 
     @if (session('success'))

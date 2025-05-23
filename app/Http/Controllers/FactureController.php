@@ -27,7 +27,7 @@ class FactureController extends Controller
     
     public function __construct()
     {
-        $this->middleware('isAdmin')->only(['create', 'store', 'edit', 'update', 'destroy']);
+        $this->middleware('isAdmin')->only([ 'edit', 'update', 'destroy']);
          app()->setLocale('fr');
     }
     

@@ -5,11 +5,10 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">Liste des Ventes</h2>
 
-        @if(auth()->user()->hasRole('admin'))
         <a href="{{ route('ventes.create') }}" class="btn btn-primary">
             <i class="bi bi-cart-plus me-1"></i> Ajouter une Vente
         </a>
-        @endif
+
                 <!-- Nouveau bouton d'export -->
       <!--   <a href="{{ route('ventes.export') }}" class="btn btn-sm btn-success" title="Exporter en PDF">
                 <i class="bi bi-file-earmark-pdf-fill me-1"></i> Exporter

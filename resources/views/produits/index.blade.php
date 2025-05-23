@@ -5,7 +5,7 @@
 <!-- En-tête avec titre, dropdown et bouton d'ajout -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold">Produits</h2>
-
+    
     <div class="d-flex align-items-center">
         <!-- Dropdown pour le filtre par type -->
         <div class="dropdown me-3">
@@ -113,10 +113,21 @@
                             <i class="bi bi-trash-fill"></i>
                         </button>
                         @endif
-                        <a href="{{ route('achats.create', ['produit_id' => $produit->id]) }}" 
-                           class="btn btn-sm btn-success" title="Acheter">
-                            <i class="bi bi-cart-plus-fill"></i>
-                        </a>
+                        
+                        
+                        @if (isAdmin() || isUser())
+                            <a href="{{ route('achats.create', ['produit_id' => $produit->id]) }}" 
+                            class="btn btn-sm btn-success" title="Achat Admin">
+                                <i class="bi bi-cart-plus-fill"></i>
+                            </a>
+                        @elseif (isClient())
+                            <a href="{{ route('clients.achats.create', ['produit_id' => $produit->id]) }}" 
+                            class="btn btn-sm btn-success" title="Acheter">
+                                <i class="bi bi-cart-plus-fill"></i>
+                            </a>
+                        @endif
+
+
                     </div>
                 </div>
             </div>

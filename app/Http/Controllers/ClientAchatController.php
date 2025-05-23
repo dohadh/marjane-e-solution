@@ -25,22 +25,21 @@ class ClientAchatController extends Controller
     {
         $produit = Produit::findOrFail($request->produit_id);
         $fournisseurs = Fournisseur::all();
-        return view('client.achats.create', compact('produits','fournisseurs'));
+        return view('clients.achats.create', compact('produit','fournisseurs'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-        'client_id' => 'required|exists:clients,id',
-        'fournisseur_id' => 'required|exists:fournisseurs,id',
-        'produit_id' => 'required|exists:produits,id',
-        'quantite' => 'required|integer|min:1',
-        'prix_achat' => 'required|numeric',
-        'date_achat' => 'required|date',
+            'fournisseur_id' => 'required|exists:fournisseurs,id',
+            'produit_id' => 'required|exists:produits,id',
+            'quantite' => 'required|integer|min:1',
+            'prix_achat' => 'required|numeric',
+            'date_achat' => 'required|date',
         ]);
 
         Achat::create([
-            'client_id' => Auth::id(), // l’utilisateur connecté
+            'client_id' => Auth::id(),
             'fournisseur_id' => $request->fournisseur_id,
             'produit_id' => $request->produit_id,
             'quantite' => $request->quantite,
@@ -52,6 +51,6 @@ class ClientAchatController extends Controller
             $produit->quantite_en_stock -= $request->quantite;
             $produit->save();
 
-        return redirect()->route('clients.achats.index')->with('success', 'Achat effectué avec succès.');
+        return redirect()->route('produits.index')->with('success', 'Achat effectué avec succès.');
     }
 }
