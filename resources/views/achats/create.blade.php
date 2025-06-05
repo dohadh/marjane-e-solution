@@ -11,6 +11,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
         </div>
     @endif
+    
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+        </div>
+    @endif
+
 
     <!-- Formulaire de création d'achat -->
     <form method="POST" action="{{ route('achats.store') }}">
@@ -61,9 +70,9 @@
     
     <!-- Fournisseur -->
     <div class="col-md-6 mb-3">
-        <label for="fournisseur_id" class="form-label">Fournisseur</label>
+        <label for="fournisseur_id" class="form-label">Livreur</label>
         <select name="fournisseur_id" id="fournisseur_id" class="form-select @error('fournisseur_id') is-invalid @enderror">
-            <option value="" disabled selected>Sélectionner un fournisseur</option>
+            <option value="" disabled selected>Sélectionner un Livreur</option>
             @foreach($fournisseurs as $fournisseur)
                 <option value="{{ $fournisseur->id }}" {{ old('fournisseur_id') == $fournisseur->id ? 'selected' : '' }}>
                     {{ $fournisseur->id }} - {{ $fournisseur->nom }}
@@ -71,15 +80,6 @@
             @endforeach
         </select>
         @error('fournisseur_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Date d'achat -->
-    <div class="col-md-6 mb-3">
-        <label for="date_achat" class="form-label">Date d'achat</label>
-        <input type="date" name="date_achat" id="date_achat" class="form-control @error('date_achat') is-invalid @enderror" value="{{ old('date_achat') }}">
-        @error('date_achat')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>

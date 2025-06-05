@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-md-3">
                     <a href="{{ route('fournisseurs.index') }}" class="btn btn-outline-info w-100 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-truck me-2"></i> Fournisseurs
+                        <i class="bi bi-truck me-2"></i> Livreurs
                     </a>
                 </div>
                 <div class="col-md-3">

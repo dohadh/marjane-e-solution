@@ -54,7 +54,7 @@ class FournisseurController extends Controller
         $fournisseur->save();
     
         // Redirection vers la liste des fournisseurs avec un message de succès
-        return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur créé avec succès.');
+        return redirect()->route('fournisseurs.index')->with('success', 'Livreur créé avec succès.');
     }
     
 
@@ -86,13 +86,13 @@ class FournisseurController extends Controller
         $fournisseur->save();
     
         // Redirection vers la liste des fournisseurs avec un message de succès
-        return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur mis à jour avec succès.');
+        return redirect()->route('fournisseurs.index')->with('success', 'Livreur mis à jour avec succès.');
     }
     
 
     public function destroy(Fournisseur $fournisseur)
     {
         $fournisseur->delete();
-        return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur supprimé.');
+        return redirect()->route('fournisseurs.index')->with('success', 'Livreur supprimé.');
     }
 }

@@ -22,11 +22,11 @@
             <div class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">
                 <i class="bi bi-box-seam me-1"></i> {{ $ruptures->count() }} produit(s) en rupture
             </div>
-            @if(auth()->user()->hasRole('admin'))
+            
             <a href="{{ route('stock.print') }}" class="btn btn-sm btn-outline-danger">
                 <i class="bi bi-filetype-pdf me-1"></i> Exporter en PDF
             </a>
-            @endif
+            
         </div>
 
         <div class="row g-4">

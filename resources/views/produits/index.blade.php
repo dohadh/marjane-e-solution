@@ -92,9 +92,17 @@
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <h5 class="card-title mb-0">{{ $produit->nom }}</h5>
-                        <span class="badge bg-info text-dark">
-                            {{ ucfirst(str_replace('_', ' ', $produit->type)) }}
-                        </span>
+                        <div class="flex gap-2">
+
+                            <span class="badge bg-info text-dark">
+                                {{ ucfirst(str_replace('_', ' ', $produit->type)) }}
+                            </span>
+                            <span class="badge {{ $produit->quantite_en_stock > 0 ? 'border border-success text-success' : 'border border-danger text-danger' }}">
+                                {{ $produit->quantite_en_stock > 0 ? 'In stock : ' . $produit->quantite_en_stock : 'Out of stock' }}
+                            </span>
+
+
+                        </div>
                     </div>
                     <p class="card-text text-muted mb-3">
                         {{ number_format($produit->prix_unitaire, 2) }} MAD

@@ -13,7 +13,7 @@
         <div class="col-md-6">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-warning text-white">
-                    <h5 class="mb-0">Modifier les informations du fournisseur</h5>
+                    <h5 class="mb-0">Modifier les informations du Livreur</h5>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())

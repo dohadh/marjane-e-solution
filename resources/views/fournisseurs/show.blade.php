@@ -4,7 +4,7 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-primary-emphasis">
-            <i class="bi bi-person-badge me-2"></i> Détails du fournisseur
+            <i class="bi bi-person-badge me-2"></i> Détails du Livreur
         </h2>
         <a href="{{ route('fournisseurs.index') }}" class="btn btn-outline-dark">
             <i class="bi bi-arrow-left-circle me-1"></i> Retour à la liste
@@ -59,7 +59,7 @@
       </div>
       <div class="modal-body text-center">
         <p class="fs-5 fw-semibold text-danger mb-3">
-          Êtes-vous sûr de vouloir supprimer ce fournisseur ?
+          Êtes-vous sûr de vouloir supprimer ce Livreur?
         </p>
         <p class="text-muted mb-0">
           Cette action est <strong>irréversible</strong>.

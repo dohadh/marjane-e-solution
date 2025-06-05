@@ -46,6 +46,8 @@ class Produit extends Model
         return $this->hasMany(Achat::class);
     }
 
+    
+
     // Relation avec le stock
     public function stocks()
     {
@@ -53,10 +55,10 @@ class Produit extends Model
     }
 
     // Relation avec les images (table produit_images)
-    public function images()
-    {
-        return $this->hasMany(ProduitImage::class); // Remarquez que la classe ProduitImage est utilisée ici
-    }
+   // public function images()
+    //{
+    //    return $this->hasMany(ProduitImage::class); 
+    //}
 
     // Méthode pour obtenir la quantité totale
     public function getQuantiteTotaleAttribute()

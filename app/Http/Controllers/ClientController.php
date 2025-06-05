@@ -89,6 +89,19 @@ class ClientController extends Controller
             ->with('success', 'Achat effectué avec succès!');
     }
 
+    public function updatePassword(Request $request, Client $client)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $client->password = Hash::make($request->password);
+        $client->save();
+
+        return redirect()->back()->with('password_status', 'Mot de passe mis à jour avec succès.');
+    }
+
+
     public function create()
     {
         return view('clients.create');

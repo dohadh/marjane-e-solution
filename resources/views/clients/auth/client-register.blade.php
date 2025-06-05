@@ -2,6 +2,35 @@
 
 @push('styles')
 <style>
+
+        :root {
+        --primary: #1e3a8a;
+        --secondary: #64748b;
+    }
+
+    body {
+        background-image: url('/images/marjane-background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0;
+    }
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* rend le fond plus sombre */
+        z-index: -1;
+    }
     .register-header {
         text-align: center;
         margin-bottom: 2rem;

@@ -14,11 +14,11 @@
                 </button>
             </div>
         </form>
-        @if(auth()->user()->hasRole('admin'))
+        
         <a href="{{ route('stock.export') }}" class="btn btn-danger">
             <i class="bi bi-file-earmark-pdf me-1"></i> Exporter PDF
         </a>
-        @endif
+        
     </div>
 
     <div class="card shadow-sm">

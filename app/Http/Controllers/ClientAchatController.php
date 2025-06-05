@@ -35,7 +35,6 @@ class ClientAchatController extends Controller
             'produit_id' => 'required|exists:produits,id',
             'quantite' => 'required|integer|min:1',
             'prix_achat' => 'required|numeric',
-            'date_achat' => 'required|date',
         ]);
 
         Achat::create([
@@ -47,10 +46,11 @@ class ClientAchatController extends Controller
             'date_achat' => now(),
         ]);
 
-            $produit = Produit::find($request->produit_id);
-            $produit->quantite_en_stock -= $request->quantite;
-            $produit->save();
+        $produit = Produit::find($request->produit_id);
+        $produit->quantite_en_stock -= $request->quantite;
+        $produit->save();
 
         return redirect()->route('produits.index')->with('success', 'Achat effectué avec succès.');
     }
+
 }

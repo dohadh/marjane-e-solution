@@ -47,9 +47,9 @@
     
     <!-- Fournisseur -->
     <div class="col-md-6 mb-3">
-        <label for="fournisseur_id" class="form-label">Fournisseur</label>
+        <label for="fournisseur_id" class="form-label">Livreur</label>
         <select name="fournisseur_id" id="fournisseur_id" class="form-select @error('fournisseur_id') is-invalid @enderror">
-            <option value="" disabled selected>Sélectionner un fournisseur</option>
+            <option value="" disabled selected>Sélectionner un Livreur</option>
             @foreach($fournisseurs as $fournisseur)
                 <option value="{{ $fournisseur->id }}" {{ old('fournisseur_id') == $fournisseur->id ? 'selected' : '' }}>
                     {{ $fournisseur->id }} - {{ $fournisseur->nom }}
@@ -61,14 +61,6 @@
         @enderror
     </div>
 
-    <!-- Date d'achat -->
-    <div class="col-md-6 mb-3">
-        <label for="date_achat" class="form-label">Date d'achat</label>
-        <input type="date" name="date_achat" id="date_achat" class="form-control @error('date_achat') is-invalid @enderror" value="{{ old('date_achat') }}">
-        @error('date_achat')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
 
     <!-- Soumettre -->
     <div class="d-flex justify-content-end">

@@ -4,7 +4,7 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-primary">
-            <i class="bi bi-person-plus me-2"></i> Ajouter un nouveau fournisseur
+            <i class="bi bi-person-plus me-2"></i> Ajouter un nouveau Livreur
         </h2>
         <a href="{{ route('fournisseurs.index') }}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left-circle me-1"></i> Retour à la liste

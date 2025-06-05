@@ -11,6 +11,15 @@
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+        </div>
+    @endif
+
+    
     <div class="d-flex justify-content-between align-items-center mb-3 px-2">
         <div>
             <span class="text-muted">Total : <strong>{{ $achats->count() }}</strong> achats</span><br>
@@ -45,7 +54,7 @@
             <thead class="table-light">
                 <tr>
                     <th>#</th>
-                    <th>Fournisseur</th>
+                    <th>Livreur</th>
                     <th>Client</th>
                     <th>Produit</th>
                     <th>Quantité</th>

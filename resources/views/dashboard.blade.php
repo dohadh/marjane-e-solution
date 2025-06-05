@@ -15,7 +15,7 @@
         @php
             $stats = [
                 ['title' => 'Clients', 'count' => $totalClients, 'color' => 'primary', 'icon' => 'users'],
-                ['title' => 'Fournisseurs', 'count' => $totalFournisseurs, 'color' => 'success', 'icon' => 'truck'],
+                ['title' => 'Livreurs', 'count' => $totalFournisseurs, 'color' => 'success', 'icon' => 'truck'],
                 ['title' => 'Produits', 'count' => $totalProduits, 'color' => 'info', 'icon' => 'box-open'],
                 ['title' => 'Factures', 'count' => $totalFactures, 'color' => 'warning', 'icon' => 'file-invoice'],
             ];
@@ -97,7 +97,7 @@
             $actions = [
                 ['title' => 'Nouveau Client', 'route' => 'clients.create', 'icon' => 'user-plus', 'color' => 'primary'],
                 ['title' => 'Nouveau Produit', 'route' => 'produits.create', 'icon' => 'box-open', 'color' => 'info'],
-                ['title' => 'Nouveau Fournisseur', 'route' => 'fournisseurs.create', 'icon' => 'truck', 'color' => 'success'],
+                ['title' => 'Nouveau Livreur', 'route' => 'fournisseurs.create', 'icon' => 'truck', 'color' => 'success'],
                 ['title' => 'Nouvelle Facture', 'route' => 'factures.create', 'icon' => 'file-invoice', 'color' => 'warning'],
 
                 // 🚀 Nouveaux accès rapides demandés :

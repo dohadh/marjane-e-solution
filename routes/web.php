@@ -26,6 +26,7 @@ use App\Http\Controllers\Client\Auth\ClientAuthenticatedSessionController;
 use App\Http\Controllers\Client\Auth\ClientRegisteredUserController;
 
 
+
 use App\Models\Client;
 use App\Models\Fournisseur;
 use App\Models\Produit;
@@ -97,6 +98,8 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth.user.or.client'])->group(function () {
     Route::resource('produits', ProduitController::class);
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::put('/clients/{client}/update-password', [ClientController::class, 'updatePassword'])->name('clients.updatePassword');
 });
 
 // Routes protégées par auth
@@ -158,11 +161,11 @@ Route::middleware(['auth'])->group(function () {
     
 
 
-    // Routes spécifiques
+    
 
 
-    // Recherche
-    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    
+   
 
     // Gestion des utilisateurs (admin seulement)
     Route::middleware('isAdmin')->group(function () {

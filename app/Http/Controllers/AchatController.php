@@ -77,10 +77,14 @@ class AchatController extends Controller
             'produit_id' => 'required|exists:produits,id',
             'quantite' => 'required|integer',
             'prix_achat' => 'required|numeric',
-            'date_achat' => 'required|date',
         ]);
 
-        $achat->update($request->all());
+        $achat->update([
+            'fournisseur_id' => $request->fournisseur_id,
+            'produit_id' => $request->produit_id,
+            'quantite' => $request->quantite,
+            'prix_achat' => $request->prix_achat,
+        ]);
 
         return redirect()->route('achats.index')->with('success', 'Achat mis à jour.');
     }
@@ -91,35 +95,37 @@ class AchatController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Valider les données
-    $request->validate([
-        'client_id' => 'required|exists:clients,id',
-        'fournisseur_id' => 'required|exists:fournisseurs,id',
-        'produit_id' => 'required|exists:produits,id',
-        'quantite' => 'required|integer|min:1',
-        'prix_achat' => 'required|numeric',
-        'date_achat' => 'required|date',
-    ]);
+    {
+        // Valider les données
+        $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'fournisseur_id' => 'required|exists:fournisseurs,id',
+            'produit_id' => 'required|exists:produits,id',
+            'quantite' => 'required|integer|min:1',
+            'prix_achat' => 'required|numeric',
+        ]);
 
-    // Créer l'achat
-    $achat = Achat::create([
-        'client_id' => $request->client_id,
-        'fournisseur_id' => $request->fournisseur_id,
-        'produit_id' => $request->produit_id,
-        'quantite' => $request->quantite,
-        'prix_achat' => $request->prix_achat * $request->quantite,
-        'date_achat' => $request->date_achat,
-    ]);
-    
-    // Mise à jour du stock
-    $produit = Produit::find($request->produit_id);
-    $produit->quantite_en_stock -= $request->quantite;
-    $produit->save();
+        // Créer l'achat
+        $achat = Achat::create([
+            'client_id' => $request->client_id,
+            'fournisseur_id' => $request->fournisseur_id,
+            'produit_id' => $request->produit_id,
+            'quantite' => $request->quantite,
+            'prix_achat' => $request->prix_achat * $request->quantite,
+            'date_achat' => now(),
+        ]);
+        
+        // Mise à jour du stock
+        $produit = Produit::find($request->produit_id);
+        if ($produit->quantite_en_stock - $request->quantite  < 0 ){
+            return back()->with('error', 'ce produit est en rupture de stock ');
+        }
+        $produit->quantite_en_stock -= $request->quantite;
+        $produit->save();
 
-    // Rediriger avec un message de succès
-    return redirect()->route('achats.index')->with('success', 'Achat enregistré avec succès.');
-}
+        // Rediriger avec un message de succès
+        return redirect()->route('achats.index')->with('success', 'Achat enregistré avec succès.');
+    }
 
 
     public function destroy(Achat $achat)

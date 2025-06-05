@@ -20,10 +20,12 @@ class ProduitController extends Controller
             ->when($search, function($query) use ($search) {
                 return $query->where('nom', 'like', '%'.$search.'%')
                              ->orWhere('reference', 'like', '%'.$search.'%');
+                             
             })
             ->when($type, function($query) use ($type) {
                 return $query->where('type', $type);
             })
+            
             ->orderBy('nom')
             ->paginate(100000);
     

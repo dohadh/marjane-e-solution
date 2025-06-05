@@ -4,7 +4,44 @@
 
 @push('styles')
 <style>
-    /* Styles spécifiques au formulaire */
+    :root {
+        --primary: #1e3a8a;
+        --secondary: #64748b;
+    }
+
+    body {
+        background-image: url('/images/marjane-background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0;
+    }
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* rend le fond plus sombre */
+        z-index: -1;
+    }
+
+    .login-container {
+        background-color: #ffffff;
+        padding: 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 420px;
+    }
+
     .login-header {
         text-align: center;
         margin-bottom: 2rem;
@@ -47,6 +84,7 @@
         border: 2px solid var(--primary);
         border-radius: 6px;
         height: 45px;
+        width: 100%;
     }
 
     .form-control:focus {
@@ -84,11 +122,18 @@
     .login-link:hover {
         text-decoration: underline;
     }
+
+    @media (max-width: 480px) {
+        .login-container {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+    }
 </style>
 @endpush
 
 @section('content')
-<div>
+{{-- <div class="login-container"> --}}
     <div class="login-header">
         <i class="bi bi-person-circle login-icon"></i>
         <h1 class="login-title">Marjan Holding</h1>
@@ -125,5 +170,5 @@
             <a href="{{ route('clients.register') }}" class="login-link">Register</a>
         </div>
     </form>
-</div>
+{{-- </div> --}}
 @endsection

@@ -3,10 +3,10 @@
 @section('content')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Liste des fournisseurs</h2>
+        <h2 class="fw-bold">Liste des Livreurs</h2>
         @if(auth()->user()->hasRole('admin'))
         <a href="{{ route('fournisseurs.create') }}" class="btn btn-primary">
-            <i class="bi bi-person-plus me-1"></i> Ajouter un fournisseur
+            <i class="bi bi-person-plus me-1"></i> Ajouter un Livreur
         </a>
         @endif
     </div>
@@ -22,7 +22,7 @@
     <div class="table-responsive shadow-sm">
         <div class="d-flex justify-content-between align-items-center mb-3 px-2">
             <div>
-                <span class="text-muted">Total : <strong>{{ $fournisseurs->count() }}</strong> fournisseurs</span>
+                <span class="text-muted">Total : <strong>{{ $fournisseurs->count() }}</strong> Livreurs</span>
             </div>
             <form method="GET" action="{{ route('fournisseurs.index') }}" class="d-flex" role="search">
                 <input type="text" name="search" class="form-control form-control-sm me-2" 
@@ -100,7 +100,7 @@
       </div>
       <div class="modal-body text-center">
         <p class="fs-5 fw-semibold text-danger mb-3">
-          Êtes-vous sûr de vouloir supprimer ce fournisseur ?
+          Êtes-vous sûr de vouloir supprimer ce Livreur?
         </p>
         <p class="text-muted mb-0">
           Cette action est <strong>irréversible</strong>.

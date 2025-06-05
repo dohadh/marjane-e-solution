@@ -71,7 +71,7 @@
                 @if(isAdmin() || isUser())
                 <li class="nav-item mb-2 {{ request()->routeIs('fournisseurs.*') ? 'active' : '' }}">
                     <a class="nav-link rounded" href="{{ route('fournisseurs.index') }}">
-                        <i class="fas fa-truck me-2"></i> Fournisseurs
+                        <i class="fas fa-truck me-2"></i> Livreurs
                     </a>
                 </li>
                 @endif
@@ -106,7 +106,7 @@
                     </a>
                 </li>
             @endif
-             @if(isAdmin() || isUser() || isClient())
+             @if(isAdmin() || isUser() )
             <li class="nav-item mb-2 {{ request()->routeIs('stock.rupture') ? 'active' : '' }}">
                 <a class="nav-link rounded text-danger" href="{{ route('stock.rupture') }}">
                     <i class="fas fa-exclamation-triangle me-2"></i> Rupture de Stock
@@ -120,13 +120,14 @@
                 </a>
             </li>
             @endif
-
+            @if(isAdmin() || isUser() || isClient())
             <form method="GET" action="{{ route('search') }}" class="d-flex mt-3">
                 <input type="text" name="search" class="form-control form-control-sm" placeholder="Rechercher..." value="{{ request('search') }}">
                 <button type="submit" class="btn btn-sm btn-outline-primary">
                     <i class="bi bi-search"></i>
                 </button>
             </form>
+             @endif
         </ul>
 
         {{-- Administration visible uniquement pour l'admin --}}

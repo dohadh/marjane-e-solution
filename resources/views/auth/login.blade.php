@@ -68,14 +68,18 @@
         box-sizing: inherit;
     }
 
-    .royal-blue-login-container {
-        background: linear-gradient(135deg, #E0F7FF 0%, #1E3A8A 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        padding: 20px;
-    }
+.royal-blue-login-container {
+    /* Use your image URL here */
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* dark overlay */
+        url('/images/marjane-background.jpg') no-repeat center center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
 
     .royal-blue-login-box {
         background: white;

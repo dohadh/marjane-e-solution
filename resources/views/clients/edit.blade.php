@@ -11,6 +11,7 @@
 
     <div class="row">
         <div class="col-md-6">
+            {{-- 🟡 Carte 1 : Infos client --}}
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-warning text-white">
                     <h5 class="mb-0">Modifier les informations du client</h5>
@@ -59,6 +60,42 @@
                     </form>
                 </div>
             </div>
+
+            {{-- ⚫ Carte 2 : Modifier le mot de passe --}}
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Modifier le mot de passe</h5>
+                </div>
+                <div class="card-body">
+                    @if (session('password_status'))
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle-fill me-1"></i> {{ session('password_status') }}
+                        </div>
+                    @endif
+
+                    <form action="{{ route('clients.updatePassword', $client) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Nouveau mot de passe</label>
+                            <input type="password" name="password" id="password" class="form-control" required minlength="8">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-dark">
+                                <i class="bi bi-key-fill me-1"></i> Mettre à jour le mot de passe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

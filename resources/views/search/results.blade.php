@@ -65,7 +65,7 @@ use Illuminate\Support\Facades\Storage;
 
     {{-- Fournisseurs --}}
     @if($fournisseurs->count())
-        <h4 class="mb-3 text-primary">Fournisseurs</h4>
+        <h4 class="mb-3 text-primary">Livreurs</h4>
         <ul class="list-group mb-4">
             @foreach($fournisseurs as $fournisseur)
                 <li class="list-group-item">
